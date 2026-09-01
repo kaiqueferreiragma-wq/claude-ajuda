@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Cliente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .aviso {
+            background: #fff3cd;
+            color: #664d03;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .botoes {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button, .cancelar {
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #dc3545;
+            color: white;
+            border: none;
+        }
+        .cancelar {
+            background: #f0f0f0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Excluir Cliente</h1>
+
+    <div class="aviso">
+        Tem certeza que deseja excluir o cliente <strong>{{ cliente["nome"] }}</strong>
+        ({{ cliente["email"] }})? Esta ação não pode ser desfeita.
+    </div>
+
+    <form method="POST">
+        <div class="botoes">
+            <button type="submit">Sim, excluir</button>
+            <a class="cancelar" href="{{ url_for('listar_clientes') }}">Cancelar</a>
+        </div>
+    </form>
+</body>
+</html>

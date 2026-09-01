@@ -1,13 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Clientes</title>
+    <meta charset="UTF-8">
+    <title>Clientes Cadastrados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        h1 {
+            font-size: 22px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .vazio {
+            margin-top: 20px;
+            color: #666;
+        }
+        .novo {
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Lista de Clientes</h1>
+    <h1>Clientes Cadastrados</h1>
 
-    {% for cliente in clientes %}
-        <p>{{ cliente.nome }} - {{ cliente.email }}</p>
-    {% endfor %}
+    <p>Olá, {{ session['cliente_nome'] }}! <a href="{{ url_for('logout') }}">Sair</a></p>
+    {% if clientes %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente["id"] }}</td>
+                <td>{{ cliente["nome"] }}</td>
+                <td>{{ cliente["email"] }}</td>
+                <td>
+                    <a href="{{ url_for('editar_cliente', cliente_id=cliente['id']) }}">Editar</a>
+                    <a href="{{ url_for('excluir_cliente', cliente_id=cliente['id']) }}">Excluir</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="vazio">Nenhum cliente cadastrado ainda.</p>
+    {% endif %}
+
+    <a class="novo" href="{{ url_for('cadastro') }}">Cadastrar novo cliente</a>
 </body>
 </html>
