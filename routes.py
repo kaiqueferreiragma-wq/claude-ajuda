@@ -161,7 +161,7 @@ def registrar_rotas(app):
     def admin_login():
         if request.method == "POST":
             email = request.form.get("email", "").strip()
-            senha = request.form.get("email", "").strip()
+            senha = request.form.get("senha", "").strip()
 
             if email == app.config["ADMIN_EMAIL"] and senha == app.config["ADMIN_SENHA"]:
                 session["admin"] = True
